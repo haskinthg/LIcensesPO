@@ -1,6 +1,8 @@
+using LIcensesPO.Models;
+
 namespace LIcensesPO.Services;
 
-public class UserService
+public class UserService: BaseService<User>
 {
     
 }

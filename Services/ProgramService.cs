@@ -1,6 +1,6 @@
 namespace LIcensesPO.Services;
 
-public class ProgramService
+public class ProgramService: BaseService<Models.Program>
 {
     
 }
