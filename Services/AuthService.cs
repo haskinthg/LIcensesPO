@@ -16,19 +16,13 @@ public class AuthService
         }
     }
 
-    public string Register(string login, string password, string lname, string fname, string role)
+    public string Register(User user)
     {
-        User user = new User
-        {
-            Login = login, 
-            Password = password,
-            URole = role,
-            FName = fname,
-            LName = lname
-        };
+        user.URole = "Пользователь";
         using (AppDbContext db = new AppDbContext())
         {
             db.Users.Add(user);
+            db.SaveChanges();
         }
 
         return user.Login;

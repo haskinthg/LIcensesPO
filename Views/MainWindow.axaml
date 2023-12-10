@@ -3,17 +3,46 @@
         xmlns:vm="using:LIcensesPO.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="300"
         x:Class="LIcensesPO.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="LIcensesPO">
+        Width="350" Height="450"
+        Title="{Binding SubmitContent}">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+    
+    <Window.Styles>
+        <Style Selector="TextBox">
+            <Setter Property="Width" Value="330"></Setter>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Width" Value="165"></Setter>
+        </Style>
+    </Window.Styles>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel>
+            <TextBox Text="{Binding User.Login, Mode=TwoWay}" Watermark="Username" Margin="5" />
+            <TextBox Text="{Binding User.Password, Mode=TwoWay}" Watermark="Password" Margin="5"/>
+
+            <TextBox Text="{Binding User.FName, Mode=TwoWay}" Watermark="First Name" Margin="5" IsVisible="{Binding SwitchFlag}" />
+            <TextBox Text="{Binding User.LName, Mode=TwoWay}" Watermark="Last Name" Margin="5" IsVisible="{Binding SwitchFlag}" />
+
+            <UniformGrid Columns="2">
+                <Button Content="{Binding SwitchContent, Mode=TwoWay}" Command="{Binding SwitchCommand}" Margin="5" />
+                <Button Content="{Binding SubmitContent, Mode=TwoWay}" Command="{Binding SubmitCommand}" Margin="5" >
+                    <Button.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Background" Value="#159C00"/>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+            </UniformGrid>
+            
+        </StackPanel>
+    </Grid>
+
 
 </Window>

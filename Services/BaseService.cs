@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using LIcensesPO.DbConfig;
-using LIcensesPO.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LIcensesPO.Services;
 
-public class BaseService<T> where T: BaseEntity
+public class BaseService<T> where T: class
 {
     public  IEnumerable<T> GetAll()
     {

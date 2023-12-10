@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "your_connection_string_here"
+    "DefaultConnection": "Server=localhost;Database=LicensesPO;User Id=sa;Password=hASKINTHG23;;Persist Security Info=False;Encrypt=False"
   }
 }

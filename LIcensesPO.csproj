@@ -8,23 +8,37 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**"/>
-        <None Remove=".gitignore"/>
+        <AvaloniaResource Include="Assets\**" />
+        <None Remove=".gitignore" />
     </ItemGroup>
 
     <ItemGroup>
-        <TrimmerRootDescriptor Include="Roots.xml"/>
+        <TrimmerRootDescriptor Include="Roots.xml" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.18"/>
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.18"/>
+        <PackageReference Include="Avalonia" Version="0.10.18" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18"/>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.5.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.5.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-        <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+        <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsetting.json">
+      	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LIcensesPO.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Лицензии ПО"
+        x:Class="LIcensesPO.Views.LicensesView">
+
+    <Design.DataContext>
+        <vm:LicensesViewModel />
+    </Design.DataContext>
+        <DataGrid Items="{Binding Licenses}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True" HeadersVisibility="All" HorizontalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="*"  />
+                <DataGridTextColumn Header="Начало" Binding="{Binding StartDate}" IsReadOnly="True"  Width="*" />
+                <DataGridTextColumn Header="Окончание" Binding="{Binding EndDate}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="Рабочая станция" Binding="{Binding Computer.Name}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="ПО" Binding="{Binding Program.Name}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="Организация" Binding="{Binding Licensor.Name}" IsReadOnly="True" Width="*" />
+
+                <DataGridTemplateColumn Header="Действия" Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить"
+                                    Command="{Binding DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}" HorizontalAlignment="Left" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+</Window>

@@ -1,3 +1,4 @@
+
 using System.IO;
 using LIcensesPO.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,14 +8,30 @@ namespace LIcensesPO.DbConfig;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Program> Programs { get; set; }
-    public DbSet<Computer> Computers { get; set; }
-    public DbSet<License> Licenses { get; set; }
-    public DbSet<Licensor> Licensors { get; set; }
+    public AppDbContext()
+    {
+        Database.Migrate();
+        Database.EnsureCreated();
+    }
+
+    public DbSet<User> Users { get; set; } = null;
+    public DbSet<Prog> Progs { get; set; } = null;
+    public DbSet<Computer> Computers { get; set; } = null;
+    public DbSet<License> Licenses { get; set; } = null;
+    public DbSet<Licensor> Licensors { get; set; } = null;
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseSqlServer("(localdb)\\mssqllocaldb;Database=LicensesPO;User Id=myUsername;Password=myPassword;");
+        if (!options.IsConfigured)
+        {
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            builder.AddJsonFile(("appsetting.json"));
+            var config = builder.Build();
+
+            options.EnableServiceProviderCaching();
+            options.UseSqlServer(config.GetConnectionString("DefaultConnection"), opt => opt.EnableRetryOnFailure());
+            base.OnConfiguring(options);
+        }
     }
 }

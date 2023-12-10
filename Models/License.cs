@@ -5,8 +5,12 @@ namespace LIcensesPO.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class License : BaseEntity
+public class License
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    
     [Required]
     public DateTime StartDate { get; set; }
 
@@ -29,7 +33,7 @@ public class License : BaseEntity
     public int ProgramId { get; set; }
 
     [ForeignKey("ProgramId")]
-    public Program Program { get; set; }
+    public Prog Prog { get; set; }
 
     [Required]
     public int LicensorId { get; set; }
