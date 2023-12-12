@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive;
-using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
-using LIcensesPO.DbConfig;
+﻿using System.Reactive;
 using LIcensesPO.Models;
 using LIcensesPO.Services;
 using LIcensesPO.Views;
@@ -15,9 +9,9 @@ namespace LIcensesPO.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private User _user;
-    private bool _switchFlag = false;
-    private string _switchContent = "Регистрация";
-    private string _submitContent = "Войти";
+    private bool _switchFlag = true;
+    private string _switchContent;
+    private string _submitContent;
     private readonly AuthService _authService;
 
     public User User
@@ -68,25 +62,23 @@ public class MainWindowViewModel : ViewModelBase
         else
         {
             bool isAuth = _authService.Login(_user.Login, _user.Password);
-            if (isAuth)
-            {
-                var licWindow = new LicensesView();
-                licWindow.Show();
-                WindowUtils.SetMainWindow(licWindow);
-                WindowUtils.CloseWindow<MainWindow>();
-            }
+            if (!isAuth) return;
+            var licWindow = new LicensesView();
+            licWindow.Show();
+            WindowUtils.SetMainWindow(licWindow);
+            WindowUtils.CloseWindow<MainWindow>();
         }
     }
 
     private void Switch()
     {
-        _setStateButtons();
         SwitchFlag = !SwitchFlag;
+        _setStateButtons();
     }
 
     private void _setStateButtons()
     {
-        SwitchContent = SwitchFlag ? "Регистрация" : "Вход";
-        SubmitContent = SwitchFlag ? "Войти" : "Зарегистрироваться";
+        SwitchContent = !SwitchFlag ? "Регистрация" : "Вход";
+        SubmitContent = !SwitchFlag ? "Войти" : "Зарегистрироваться";
     }
 }

@@ -18,18 +18,29 @@ public class LicensesViewModel: ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _licenses, value);
     }
 
-    public ReactiveCommand<License, Unit> DeleteCommand { get; }
+    public ReactiveCommand<int, Unit> DeleteCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> AddCommand { get; }
 
     public LicensesViewModel()
     {
         _licenseService = new LicenseService();
         // Инициализация списка лицензий
         Licenses = new DataGridCollectionView(_licenseService.GetAll());
-        // Инициализация команды удаления
-        DeleteCommand = ReactiveCommand.CreateFromObservable<License, Unit>(license =>
-        {
-            Licenses.Remove(license);
-            return Observable.Return(Unit.Default);
-        });
+        // Инициализация команд
+        AddCommand = ReactiveCommand.Create(Add);
+        DeleteCommand = ReactiveCommand.Create<int>(Delete);
+    }
+
+    private void Add()
+    {
+        Licenses.AddNew();
+ //       Licenses.CommitNew();
+    }
+
+    private void Delete(int id)
+    {
+        Licenses.Remove(_licenseService.GetById(id));
+        _licenseService.Delete(id);
     }
 }

@@ -11,7 +11,8 @@
     <Design.DataContext>
         <vm:LicensesViewModel />
     </Design.DataContext>
-        <DataGrid Items="{Binding Licenses}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True" HeadersVisibility="All" HorizontalAlignment="Stretch">
+    <Grid>
+        <DataGrid Items="{Binding Licenses}" AutoGenerateColumns="False"  CanUserResizeColumns="True" CanUserSortColumns="True" HeadersVisibility="All" HorizontalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="*"  />
                 <DataGridTextColumn Header="Начало" Binding="{Binding StartDate}" IsReadOnly="True"  Width="*" />
@@ -22,15 +23,17 @@
                 <DataGridTextColumn Header="ПО" Binding="{Binding Program.Name}" IsReadOnly="True" Width="*" />
                 <DataGridTextColumn Header="Организация" Binding="{Binding Licensor.Name}" IsReadOnly="True" Width="*" />
 
-                <DataGridTemplateColumn Header="Действия" Width="*" >
+                <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Удалить"
-                                    Command="{Binding DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}" HorizontalAlignment="Left" />
+                                    Command="{Binding DeleteCommand}"
+                                    CommandParameter="{Binding Id}" HorizontalAlignment="Left" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Добавить" Command="{Binding AddCommand}" VerticalAlignment="Bottom" Width="100" Margin="5" />
+    </Grid>
 </Window>

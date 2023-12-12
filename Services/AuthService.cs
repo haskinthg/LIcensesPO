@@ -11,7 +11,7 @@ public class AuthService
         bool isLogin;
         using (AppDbContext db = new AppDbContext())
         {
-            var user = db.Users.SingleOrDefault(u => u.Login == login);;
+            var user = db.Users.SingleOrDefault(u => u.Login == login && u.Password == password);;
             return user != null;
         }
     }
