@@ -18,4 +18,10 @@ public static class WindowUtils
         var lifeTime = (IClassicDesktopStyleApplicationLifetime)Application.Current?.ApplicationLifetime!;
         lifeTime?.Windows.Last(w => w is TWindow).Close();
     }
+
+    public static Window GetCurrent<TWindow>()
+    {
+        var lifeTime = (IClassicDesktopStyleApplicationLifetime)Application.Current?.ApplicationLifetime!;
+        return lifeTime?.Windows.Last(w => w is TWindow);
+    }
 }

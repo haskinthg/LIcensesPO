@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LIcensesPO.Models;
 
-public class Prog: BaseEntity
+public class BaseEntity
 {
-    [Required]
-    public string Name { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long? Id { get; set; }
 }

@@ -1,21 +1,15 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:LIcensesPO.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:utils="clr-namespace:LIcensesPO.Utils"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="Лицензии ПО"
-        RequestedThemeVariant="Light"
-        x:Class="LIcensesPO.Views.LicensesView">
-
-    <Window.Resources>
-        <utils:DateTimeConverter x:Key="DateTimeConverter" />
-    </Window.Resources>
-    
-    <Design.DataContext>
-        <vm:LicensesViewModel />
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:LIcensesPO.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Icon="/Assets/avalonia-logo.ico"
+             Title="ПО"
+             RequestedThemeVariant="Light"
+             x:Class="LIcensesPO.Views.ProgramsView">
+  <Design.DataContext>
+        <viewModels:ProgramsViewModel />
     </Design.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -38,13 +32,7 @@
         <DataGrid Name="dataGrid" Grid.Row="1" ItemsSource="{Binding Data}" AutoGenerateColumns="False"  CanUserResizeColumns="True" CanUserSortColumns="True" HeadersVisibility="All" HorizontalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="*"  />
-                <DataGridTextColumn Header="Начало" Binding="{Binding StartDate, Converter={StaticResource DateTimeConverter}}" IsReadOnly="True"  Width="*" />
-                <DataGridTextColumn Header="Окончание" Binding="{Binding EndDate, Converter={StaticResource DateTimeConverter}}" IsReadOnly="True" Width="*" />
-                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" IsReadOnly="True" Width="*" />
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True" Width="*" />
-                <DataGridTextColumn Header="Рабочая станция" Binding="{Binding Computer.Name}" IsReadOnly="True" Width="*" />
-                <DataGridTextColumn Header="ПО" Binding="{Binding Prog.Name}" IsReadOnly="True" Width="*" />
-                <DataGridTextColumn Header="Организация" Binding="{Binding Licensor.Name}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" IsReadOnly="True" Width="*" />
 
                 <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>

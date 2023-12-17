@@ -4,4 +4,4 @@ using LIcensesPO.Views;
 
 namespace LIcensesPO.ViewModels;
 
-public class LicensesViewModel() : BaseTableViewModel<License, LicensesView>(new LicenseService());
+public class LicensorsViewModel() : BaseTableViewModel<Licensor, LicensorsView>( new LicensorService());

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using LIcensesPO.DbConfig;
+using LIcensesPO.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LIcensesPO.Services;
 
-public class BaseService<T> where T: class
+public class BaseService<T> where T: BaseEntity
 {
-    public  IEnumerable<T> GetAll()
+    public virtual  IEnumerable<T> GetAll()
     {
         using (var dbContext = new AppDbContext())
         {
@@ -17,7 +18,7 @@ public class BaseService<T> where T: class
         }
     }
 
-    public  T GetById(int id)
+    public virtual  T GetById(long id)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -25,7 +26,7 @@ public class BaseService<T> where T: class
         }
     }
 
-    public  void Add(T entity)
+    public virtual  void Add(T entity)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -34,7 +35,7 @@ public class BaseService<T> where T: class
         }
     }
 
-    public  void Update(T entity)
+    public virtual void Update(T entity)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -43,7 +44,7 @@ public class BaseService<T> where T: class
         }
     }
 
-    public  void Delete(int id)
+    public virtual void Delete(long id)
     {
         using (var dbContext = new AppDbContext())
         {

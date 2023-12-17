@@ -3,11 +3,11 @@ using LIcensesPO.ViewModels;
 
 namespace LIcensesPO.Views;
 
-public partial class MainWindow : Window
+public partial class ProgramsView : Window
 {
-    public MainWindow()
+    public ProgramsView()
     {
         InitializeComponent();
-        DataContext = new MainWindowViewModel();
+        DataContext = new ProgramsViewModel();
     }
 }

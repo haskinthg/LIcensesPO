@@ -24,11 +24,11 @@ namespace LIcensesPO.Migrations
 
             modelBuilder.Entity("LIcensesPO.Models.Computer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long?>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,20 +41,20 @@ namespace LIcensesPO.Migrations
 
             modelBuilder.Entity("LIcensesPO.Models.License", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long?>("Id"));
 
-                    b.Property<int>("ComputerId")
-                        .HasColumnType("int");
+                    b.Property<long>("ComputerId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LicensorId")
-                        .HasColumnType("int");
+                    b.Property<long>("LicensorId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -63,8 +63,8 @@ namespace LIcensesPO.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProgramId")
-                        .HasColumnType("int");
+                    b.Property<long>("ProgramId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -82,11 +82,11 @@ namespace LIcensesPO.Migrations
 
             modelBuilder.Entity("LIcensesPO.Models.Licensor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long?>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -103,11 +103,11 @@ namespace LIcensesPO.Migrations
 
             modelBuilder.Entity("LIcensesPO.Models.Prog", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long?>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -120,11 +120,11 @@ namespace LIcensesPO.Migrations
 
             modelBuilder.Entity("LIcensesPO.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long?>("Id"));
 
                     b.Property<string>("FName")
                         .IsRequired()

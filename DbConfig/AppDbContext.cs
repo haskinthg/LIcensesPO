@@ -1,4 +1,3 @@
-
 using System.IO;
 using LIcensesPO.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,8 +28,9 @@ public class AppDbContext : DbContext
             builder.AddJsonFile(("appsetting.json"));
             var config = builder.Build();
 
-            options.EnableServiceProviderCaching();
-            options.UseSqlServer(config.GetConnectionString("DefaultConnection"), opt => opt.EnableRetryOnFailure());
+            options.UseLazyLoadingProxies(false)
+                .EnableServiceProviderCaching()
+                .UseSqlServer(config.GetConnectionString("DefaultConnection"), opt => opt.EnableRetryOnFailure());
             base.OnConfiguring(options);
         }
     }
