@@ -116,7 +116,7 @@ public class ObjectEditorWindow<T> : Window
             {
                 var propertyName = propertyTextBox.Key;
                 var propertyValue = typeof(T).GetProperty(propertyName)?.GetValue(editingObject)?.ToString();
-                if (propertyTextBox is TextBox)
+                if (propertyTextBox.Value is TextBox)
                     ((TextBox)propertyTextBox.Value).Text = propertyValue;
                 else ((DatePicker)propertyTextBox.Value).SelectedDate = DateTime.Parse(propertyValue);
             }

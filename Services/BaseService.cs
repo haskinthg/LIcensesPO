@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LIcensesPO.Services;
 
-public class BaseService<T> where T: BaseEntity
+public interface BaseService<T> where T: BaseEntity
 {
-    public virtual  IEnumerable<T> GetAll()
+    public IEnumerable<T> GetAll()
     {
         using (var dbContext = new AppDbContext())
         {
@@ -18,7 +18,7 @@ public class BaseService<T> where T: BaseEntity
         }
     }
 
-    public virtual  T GetById(long id)
+    public  T GetById(long id)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -26,7 +26,7 @@ public class BaseService<T> where T: BaseEntity
         }
     }
 
-    public virtual  void Add(T entity)
+    public void Add(T entity)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -35,7 +35,7 @@ public class BaseService<T> where T: BaseEntity
         }
     }
 
-    public virtual void Update(T entity)
+    public void Update(T entity)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -44,7 +44,7 @@ public class BaseService<T> where T: BaseEntity
         }
     }
 
-    public virtual void Delete(long id)
+    public  void Delete(long id)
     {
         using (var dbContext = new AppDbContext())
         {
@@ -57,7 +57,7 @@ public class BaseService<T> where T: BaseEntity
         }
     }
     
-    public virtual IEnumerable<T> Filter(Expression<Func<T, bool>> filter)
+    public  IEnumerable<T> Filter(Expression<Func<T, bool>> filter)
     {
         using (var dbContext = new AppDbContext())
         {

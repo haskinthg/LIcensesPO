@@ -8,7 +8,7 @@ namespace LIcensesPO.Services;
 
 public class LicenseService: BaseService<License>
 {
-    public override  IEnumerable<License> GetAll()
+    public  IEnumerable<License> GetAll()
     {
         using (var dbContext = new AppDbContext())
         {
@@ -20,7 +20,7 @@ public class LicenseService: BaseService<License>
         }
     }
 
-    public override License GetById(long id)
+    public License GetById(long id)
     {
         using (var db = new AppDbContext())
         {

@@ -1,45 +1,53 @@
 <Window xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:LIcensesPO.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             Icon="/Assets/avalonia-logo.ico"
-             Title="Рабочие станции"
-             RequestedThemeVariant="Light"
-             x:Class="LIcensesPO.Views.ComputersView">
-  <Design.DataContext>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:LIcensesPO.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Рабочие станции"
+        RequestedThemeVariant="Light"
+        x:Class="LIcensesPO.Views.ComputersView">
+    <Design.DataContext>
         <viewModels:ComputersViewModel />
     </Design.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Автоматический размер для меню -->
-            <RowDefinition Height="*"/>    <!-- Занимает оставшееся пространство для DataGrid -->
+            <RowDefinition Height="Auto" /> <!-- Автоматический размер для меню -->
+            <RowDefinition Height="*" />    <!-- Занимает оставшееся пространство для DataGrid -->
         </Grid.RowDefinitions>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Таблица">
-                <MenuItem Header="Лицензии ПО" Command="{Binding ChangeTableCommand}" CommandParameter="Licenses"/>
-                <MenuItem Header="Поставщики лицензий" Command="{Binding ChangeTableCommand}" CommandParameter="Licensors"/>
-                <MenuItem Header="ПО" Command="{Binding ChangeTableCommand}" CommandParameter="Programs"/>
-                <MenuItem Header="Рабочие станции" Command="{Binding ChangeTableCommand}" CommandParameter="Computers"/>
+                <MenuItem Header="Лицензии ПО" Command="{Binding ChangeTableCommand}" CommandParameter="Licenses" />
+                <MenuItem Header="Поставщики лицензий" Command="{Binding ChangeTableCommand}"
+                          CommandParameter="Licensors" />
+                <MenuItem Header="ПО" Command="{Binding ChangeTableCommand}" CommandParameter="Programs" />
+                <MenuItem Header="Рабочие станции" Command="{Binding ChangeTableCommand}" CommandParameter="Computers" />
             </MenuItem>
             <MenuItem Header="Операции">
-                <MenuItem Header="Добавить" Command="{Binding AddCommand}"/>
-                <MenuItem Header="Экспорт в xlsx" Command="{Binding ExportCommand}"/>
-                <MenuItem Header="Выход" Command="{Binding ExitCommand}"/>
+                <MenuItem Header="Добавить" Command="{Binding AddCommand}" />
+                <MenuItem Header="Экспорт в xlsx" Command="{Binding ExportCommand}" />
+                <MenuItem Header="Выход" Command="{Binding ExitCommand}" />
             </MenuItem>
         </Menu>
-        <DataGrid Name="dataGrid" Grid.Row="1" ItemsSource="{Binding Data}" AutoGenerateColumns="False"  CanUserResizeColumns="True" CanUserSortColumns="True" HeadersVisibility="All" HorizontalAlignment="Stretch">
+        <DataGrid Name="dataGrid" Grid.Row="1" ItemsSource="{Binding Data}" AutoGenerateColumns="False"
+                  CanUserResizeColumns="True" CanUserSortColumns="True" HeadersVisibility="All"
+                  HorizontalAlignment="Stretch">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="*"  />
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="*" />
                 <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" IsReadOnly="True" Width="*" />
 
                 <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate >
-                            <Button HorizontalContentAlignment="Center" Content="Удалить"
-                                    Command="{Binding #dataGrid.DataContext.DeleteCommand,  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                    CommandParameter="{Binding  Id}" HorizontalAlignment="Left" />
+                        <DataTemplate>
+                            <WrapPanel>
+                                <Button HorizontalContentAlignment="Center" Content="Удалить"
+                                        Command="{Binding #dataGrid.DataContext.DeleteCommand,  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding  Id}" HorizontalAlignment="Left" />
+                                <Button HorizontalContentAlignment="Center" Content="Обновить"
+                                        Command="{Binding #dataGrid.DataContext.UpdateCommand,  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding  Id}" HorizontalAlignment="Left" />
+                            </WrapPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

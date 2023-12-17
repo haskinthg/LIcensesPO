@@ -38,9 +38,14 @@
                 <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate >
-                            <Button HorizontalContentAlignment="Center" Content="Удалить"
-                                    Command="{Binding #dataGrid.DataContext.DeleteCommand,  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                    CommandParameter="{Binding  Id}" HorizontalAlignment="Left" />
+                            <WrapPanel>
+                                <Button HorizontalContentAlignment="Center" Content="Удалить"
+                                        Command="{Binding #dataGrid.DataContext.DeleteCommand,  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding  Id}" HorizontalAlignment="Left" />
+                                <Button HorizontalContentAlignment="Center" Content="Обновить"
+                                        Command="{Binding #dataGrid.DataContext.UpdateCommand,  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding  Id}" HorizontalAlignment="Left" />
+                            </WrapPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

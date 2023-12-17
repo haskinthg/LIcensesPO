@@ -29,6 +29,7 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
         ExportCommand = ReactiveCommand.Create(Export);
         ExitCommand = ReactiveCommand.Create(Exit);
         ChangeTableCommand = ReactiveCommand.Create<String>(ChangeTable);
+        UpdateCommand = ReactiveCommand.Create<long>(Update);
     }
     
     private DataGridCollectionView _licenses;
@@ -50,6 +51,8 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
     public ReactiveCommand<Unit, Unit> ExitCommand { get; }
     
     public ReactiveCommand<String, Unit> ChangeTableCommand { get; }
+    
+    public ReactiveCommand<long, Unit> UpdateCommand { get; }
     
 
     private void Exit()
@@ -106,6 +109,16 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
         Data.Remove(_service.GetById(id));
         _service.Delete(id);
         Refresh();
+    }
+
+    private async void Update(long id)
+    {
+       T entity = _service.GetById(id);
+       var obj = new ObjectEditorWindow<T>(entity);
+       T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
+       result.Id = entity.Id;
+       _service.Update(result);
+       Refresh();
     }
 
     private void Export()
