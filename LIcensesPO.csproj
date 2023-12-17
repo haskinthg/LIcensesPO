@@ -48,9 +48,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Templates\License.docm" />
+      <None Remove="Templates\License.docx" />
       <None Include="Templates\License.docx">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+    
+    
 </Project>
