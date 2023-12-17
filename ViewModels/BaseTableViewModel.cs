@@ -96,11 +96,18 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
 
     private async void Add()
     {
-        var obj = new ObjectEditorWindow<T>();
-        T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
-        result.Id = null;
-        _service.Add(result);
-        Refresh();
+        try
+        {
+            var obj = new ObjectEditorWindow<T>();
+            T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
+            result.Id = null;
+            _service.Add(result);
+            Refresh();
+        }
+        catch (Exception ex)
+        {
+            
+        }
     }
     
 
@@ -113,12 +120,19 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
 
     private async void Update(long id)
     {
-       T entity = _service.GetById(id);
-       var obj = new ObjectEditorWindow<T>(entity);
-       T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
-       result.Id = entity.Id;
-       _service.Update(result);
-       Refresh();
+        try
+        {
+            T entity = _service.GetById(id);
+            var obj = new ObjectEditorWindow<T>(entity);
+            T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
+            result.Id = entity.Id;
+            _service.Update(result);
+            Refresh();
+        }
+        catch (Exception ex)
+        {
+            
+        }
     }
 
     private void Export()
