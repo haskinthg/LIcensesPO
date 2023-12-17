@@ -19,4 +19,16 @@ public class LicenseService: BaseService<License>
                 .ToList();
         }
     }
+
+    public override License GetById(long id)
+    {
+        using (var db = new AppDbContext())
+        {
+            return db.Licenses
+                .Include(l => l.Computer)
+                .Include(l => l.Licensor)
+                .Include(l => l.Prog)
+                .FirstOrDefault();
+        }
+    }
 }

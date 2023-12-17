@@ -15,7 +15,7 @@ namespace LIcensesPO.ViewModels;
 
 public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
 {
-    private BaseService<T> _service;
+    protected BaseService<T> _service;
     public BaseTableViewModel(BaseService<T> service)
     {
         _service = service;

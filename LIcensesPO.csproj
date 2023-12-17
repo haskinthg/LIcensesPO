@@ -33,6 +33,8 @@
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.5.0" />
+        <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
+        <PackageReference Include="NS.OpenXml.Bookmark" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -43,5 +45,12 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Templates\License.docm" />
+      <None Include="Templates\License.docx">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>
