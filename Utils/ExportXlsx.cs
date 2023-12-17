@@ -11,6 +11,7 @@ public static class ExportXlsx
 {
     public static String Export<T>(IEnumerable<T> table)
     {
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         using (var package = new ExcelPackage())
         {
             ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(typeof(T).Name);
