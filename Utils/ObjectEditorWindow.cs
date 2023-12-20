@@ -12,7 +12,7 @@ using ReactiveUI;
 
 namespace LIcensesPO.Utils;
 
-public class ObjectEditorWindow<T> : Window
+public class ObjectEditorWindow<T> : Window where T : class
 {
     private readonly Dictionary<string, TemplatedControl>
         propertyTextBoxes = new Dictionary<string, TemplatedControl>();
@@ -147,7 +147,8 @@ public class ObjectEditorWindow<T> : Window
 
     private void CancelClick()
     {
-        Close(default);
+        T obj = null;
+        Close(obj);
     }
 
     private bool IsPrimitive(Type type)

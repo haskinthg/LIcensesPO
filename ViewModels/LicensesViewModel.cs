@@ -1,3 +1,4 @@
+using System;
 using System.Reactive;
 using LIcensesPO.Models;
 using LIcensesPO.Services;
@@ -19,8 +20,15 @@ public class LicensesViewModel: BaseTableViewModel<License, LicensesView>
 
     public void ExportDocx(long id)
     {
-        License license = _service.GetById(id);
-        string file = ExportLicenseWord.Export(license);
-        MessageBoxManager.GetMessageBoxStandard("Экспорт WORD", $"Экспорт завершен: {file}").ShowAsync();
+        try
+        {
+            License license = _service.GetById(id);
+            string file = ExportLicenseWord.Export(license);
+            MessageBoxManager.GetMessageBoxStandard("Экспорт WORD", $"Экспорт завершен: {file}").ShowAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
+        }
     }
 }

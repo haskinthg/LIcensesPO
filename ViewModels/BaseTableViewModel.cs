@@ -57,10 +57,17 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
 
     private void Exit()
     {
-        var loginWin = new MainWindow();
-        loginWin.Show();
-        WindowUtils.SetMainWindow(loginWin);
-        WindowUtils.CloseWindow<LicensesView>();
+        try
+        {
+            var loginWin = new MainWindow();
+            loginWin.Show();
+            WindowUtils.SetMainWindow(loginWin);
+            WindowUtils.CloseWindow<TView>();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
+        }
     }
 
     private void ChangeTable(String type)
@@ -100,22 +107,30 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
         {
             var obj = new ObjectEditorWindow<T>();
             T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
+            if (result == null) return;
             result.Id = null;
             _service.Add(result);
             Refresh();
         }
         catch (Exception ex)
         {
-            
+            await MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
         }
     }
     
 
     private void Delete(long id)
     {
-        Data.Remove(_service.GetById(id));
-        _service.Delete(id);
-        Refresh();
+        try
+        {
+            Data.Remove(_service.GetById(id));
+            _service.Delete(id);
+            Refresh();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
+        }
     }
 
     private async void Update(long id)
@@ -125,19 +140,27 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
             T entity = _service.GetById(id);
             var obj = new ObjectEditorWindow<T>(entity);
             T result = await obj.ShowDialog<T>(WindowUtils.GetCurrent<TView>());
+            if (result == null) return;
             result.Id = entity.Id;
             _service.Update(result);
             Refresh();
         }
         catch (Exception ex)
         {
-            
+            await MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
         }
     }
 
     private void Export()
     {
-        String file = ExportXlsx.Export(_observableCollection);
-        MessageBoxManager.GetMessageBoxStandard("Экспорт XLSX", $"Экспорт завершен: {file}").ShowAsync();
+        try
+        {
+            String file = ExportXlsx.Export(_observableCollection);
+            MessageBoxManager.GetMessageBoxStandard("Экспорт XLSX", $"Экспорт завершен: {file}").ShowAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
+        }
     }
 }
