@@ -27,11 +27,11 @@
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel>
-            <TextBox Text="{Binding User.Login, Mode=TwoWay}" Watermark="Username" Margin="5" />
-            <TextBox Text="{Binding User.Password, Mode=TwoWay}" Watermark="Password" Margin="5"/>
+            <TextBox Text="{Binding Login, Mode=TwoWay}" Watermark="Username" Margin="5" />
+            <TextBox Text="{Binding Password, Mode=TwoWay}" Watermark="Password" PasswordChar="•" Margin="5"/>
 
-            <TextBox Text="{Binding User.FName, Mode=TwoWay}" Watermark="First Name" Margin="5" IsVisible="{Binding SwitchFlag}" />
-            <TextBox Text="{Binding User.LName, Mode=TwoWay}" Watermark="Last Name" Margin="5" IsVisible="{Binding SwitchFlag}" />
+            <TextBox Text="{Binding FName, Mode=TwoWay}" Watermark="First Name" Margin="5" IsVisible="{Binding SwitchFlag}" />
+            <TextBox Text="{Binding LName, Mode=TwoWay}" Watermark="Last Name" Margin="5" IsVisible="{Binding SwitchFlag}" />
 
             <UniformGrid Columns="2">
                 <Button Content="{Binding SwitchContent, Mode=TwoWay}" Command="{Binding SwitchCommand}" Margin="5" />

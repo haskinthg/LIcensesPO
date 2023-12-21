@@ -1,23 +1,46 @@
-﻿using System.Reactive;
+﻿using System;
+using System.Reactive;
+using System.Reactive.Linq;
 using LIcensesPO.Models;
 using LIcensesPO.Services;
 using LIcensesPO.Views;
+using MsBox.Avalonia;
 using ReactiveUI;
 
 namespace LIcensesPO.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private User _user;
+    private string _password;
+    private string _login;
+    private string _lname;
+    private string _fname;
     private bool _switchFlag = true;
     private string _switchContent;
     private string _submitContent;
     private readonly AuthService _authService;
-
-    public User User
+    public String Login
     {
-        get => _user;
-        set => this.RaiseAndSetIfChanged(ref _user, value);
+        get => _login;
+        set => this.RaiseAndSetIfChanged(ref _login, value);
+    }
+    
+    public String Password
+    {
+        get => _password;
+        set => this.RaiseAndSetIfChanged(ref _password, value);
+    }
+    
+    public String LName
+    {
+        get => _lname;
+        set => this.RaiseAndSetIfChanged(ref _lname, value);
+    }
+    
+    public String FName
+    {
+        get => _fname;
+        set => this.RaiseAndSetIfChanged(ref _fname, value);
     }
 
     public bool SwitchFlag
@@ -38,13 +61,26 @@ public class MainWindowViewModel : ViewModelBase
 
     public ReactiveCommand<Unit, Unit> SwitchCommand { get; }
     public ReactiveCommand<Unit, Unit> SubmitCommand { get; }
-
+    
     public MainWindowViewModel()
     {
-        User = new User();
         _authService = new AuthService();
+
+        var canExecute = this.WhenAnyValue(
+            x => x.Login,
+            x => x.Password,
+            x => x.LName,
+            x => x.FName,
+            (l, p, ln, lf) =>
+            {
+                bool authCheck = !string.IsNullOrWhiteSpace(l) && !string.IsNullOrWhiteSpace(p);
+                if (!SwitchFlag)
+                    return authCheck;
+                else return authCheck && !string.IsNullOrWhiteSpace(ln) && !string.IsNullOrWhiteSpace(lf);
+            });
+        
         SwitchCommand = ReactiveCommand.Create(Switch);
-        SubmitCommand = ReactiveCommand.Create(Submit);
+        SubmitCommand = ReactiveCommand.Create(Submit, canExecute);
 
         // Инициализация начального состояния представления
         SwitchFlag = false;
@@ -53,6 +89,13 @@ public class MainWindowViewModel : ViewModelBase
 
     private void Submit()
     {
+        var _user = new User()
+        {
+            Login = Login,
+            Password = Password,
+            LName = LName,
+            FName = FName
+        };
         _setStateButtons();
         if (SwitchFlag)
         {

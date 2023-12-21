@@ -10,7 +10,7 @@ public static class ExportLicenseWord
 {
     public static string Export(License license)
     {
-        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "\\Template\\License.docx");
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Template", "License.docx");
         
         // Создаем экземпляр приложения Word
         Word.Application wordApp = new Word.Application();
@@ -27,7 +27,7 @@ public static class ExportLicenseWord
 
         string path = Path.Combine(Directory.GetCurrentDirectory(), $"License_{doc.GetHashCode()}.docx");
         // Сохраняем документ
-        doc.SaveAs2(path);
+        doc.SaveAs(path);
 
         // Закрываем Word
         wordApp.Quit();
