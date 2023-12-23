@@ -30,6 +30,7 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
         ExitCommand = ReactiveCommand.Create(Exit);
         ChangeTableCommand = ReactiveCommand.Create<String>(ChangeTable);
         UpdateCommand = ReactiveCommand.Create<long>(Update);
+        DocxCommand = ReactiveCommand.Create<long>(ExportDocx);
     }
     
     private DataGridCollectionView _licenses;
