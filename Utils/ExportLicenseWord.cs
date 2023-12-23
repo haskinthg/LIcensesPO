@@ -44,13 +44,13 @@ public static class ExportLicenseWord
             {
                 BookMarkType = BookMarkType.Text,
                 BookMarkName = "START",
-                BookMarkValue = license.StartDate.ToString(CultureInfo.CurrentCulture)
+                BookMarkValue = license.StartDate.ToString("yy-MM-dd")
             },
             new BookMark()
             {
                 BookMarkType = BookMarkType.Text,
                 BookMarkName = "END",
-                BookMarkValue = license.EndDate.ToString(CultureInfo.CurrentCulture)
+                BookMarkValue = license.EndDate.ToString("yy-MM-dd")
             },
             new BookMark()
             {

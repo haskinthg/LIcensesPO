@@ -30,7 +30,11 @@ public static class ExportXlsx
                 col = 1;
                 foreach (PropertyInfo property in GetProperties<T>())
                 {
-                    worksheet.Cells[row, col].Value = property.GetValue(item);
+                    object val = property.GetValue(item);
+                    object stringVal;
+                    if (val.GetType() == typeof(DateTime)) stringVal = ((DateTime)val).ToString("yy-MM-dd");
+                    else stringVal = val.ToString();
+                    worksheet.Cells[row, col].Value = val;
                     col++;
                 }
 
