@@ -34,7 +34,7 @@ public static class ExportXlsx
                     object stringVal;
                     if (val.GetType() == typeof(DateTime)) stringVal = ((DateTime)val).ToString("yy-MM-dd");
                     else stringVal = val.ToString();
-                    worksheet.Cells[row, col].Value = val;
+                    worksheet.Cells[row, col].Value = stringVal;
                     col++;
                 }
 
