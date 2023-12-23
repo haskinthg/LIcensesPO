@@ -41,7 +41,7 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
     }
     
     ObservableCollection<T> _observableCollection = new();
-
+    
     public ReactiveCommand<long, Unit> DeleteCommand { get; }
     
     public ReactiveCommand<Unit, Unit> AddCommand { get; }
@@ -53,6 +53,8 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
     public ReactiveCommand<String, Unit> ChangeTableCommand { get; }
     
     public ReactiveCommand<long, Unit> UpdateCommand { get; }
+    
+    public ReactiveCommand<long, Unit> DocxCommand { get; }
     
 
     private void Exit()
@@ -157,6 +159,20 @@ public class BaseTableViewModel<T, TView>: ViewModelBase where T: BaseEntity
         {
             String file = ExportXlsx.Export(_observableCollection);
             MessageBoxManager.GetMessageBoxStandard("Экспорт XLSX", $"Экспорт завершен: {file}").ShowAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxManager.GetMessageBoxStandard("Ошибка", ex.Message).ShowAsync();
+        }
+    }
+
+    public void ExportDocx(long id)
+    {
+        try
+        {
+            License license = _service.GetById(id) as License;
+            string file = ExportLicenseWord.Export(license);
+            MessageBoxManager.GetMessageBoxStandard("Экспорт WORD", $"Экспорт завершен: {file}").ShowAsync();
         }
         catch (Exception ex)
         {
