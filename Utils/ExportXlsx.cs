@@ -32,7 +32,7 @@ public static class ExportXlsx
                 {
                     object val = property.GetValue(item);
                     object stringVal;
-                    if (val.GetType() == typeof(DateTime)) stringVal = ((DateTime)val).ToString("yy-MM-dd");
+                    if (val.GetType() == typeof(DateTime)) stringVal = ((DateTime)val).ToString("dd.MM.yyyy");
                     else stringVal = val.ToString();
                     worksheet.Cells[row, col].Value = stringVal;
                     col++;

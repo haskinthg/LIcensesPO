@@ -10,7 +10,7 @@ public class DateTimeConverter : IValueConverter
     {
         if (value is DateTime dateTime)
         {
-            return dateTime.ToString("yyyy-MM-dd");
+            return dateTime.ToString("yyyy.MM.dd");
         }
         return value;
     }
