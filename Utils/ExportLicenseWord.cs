@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using LIcensesPO.Models;
 using Word = Microsoft.Office.Interop.Word;
@@ -10,7 +11,7 @@ public static class ExportLicenseWord
 {
     public static string Export(License license)
     {
-        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Template", "License.docx");
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "License.docx");
         
         // Создаем экземпляр приложения Word
         Word.Application wordApp = new Word.Application();
@@ -43,13 +44,13 @@ public static class ExportLicenseWord
             {
                 BookMarkType = BookMarkType.Text,
                 BookMarkName = "START",
-                BookMarkValue = license.StartDate.ToString()
+                BookMarkValue = license.StartDate.ToString(CultureInfo.CurrentCulture)
             },
             new BookMark()
             {
                 BookMarkType = BookMarkType.Text,
                 BookMarkName = "END",
-                BookMarkValue = license.EndDate.ToString()
+                BookMarkValue = license.EndDate.ToString(CultureInfo.CurrentCulture)
             },
             new BookMark()
             {
