@@ -104,12 +104,19 @@ public class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            bool isAuth = _authService.Login(_user.Login, _user.Password);
-            if (!isAuth) return;
-            var licWindow = new LicensesView();
-            licWindow.Show();
-            WindowUtils.SetMainWindow(licWindow);
-            WindowUtils.CloseWindow<MainWindow>();
+            try
+            {
+                bool isAuth = _authService.Login(_user.Login, _user.Password);
+                if (!isAuth) return;
+                var licWindow = new LicensesView();
+                licWindow.Show();
+                WindowUtils.SetMainWindow(licWindow);
+                WindowUtils.CloseWindow<MainWindow>();
+            }
+            catch (Exception e)
+            {
+                MessageBoxManager.GetMessageBoxStandard("Ошибка", e.Message).ShowAsync();
+            }
         }
     }
 
