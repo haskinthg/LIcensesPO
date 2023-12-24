@@ -24,7 +24,7 @@ public class LicenseService: BaseService<License>
     {
         using (var db = new AppDbContext())
         {
-            return db.Licenses
+            return db.Licenses.Where(u => u.Id == id)
                 .Include(l => l.Computer)
                 .Include(l => l.Licensor)
                 .Include(l => l.Prog)
