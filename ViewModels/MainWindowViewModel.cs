@@ -108,9 +108,9 @@ public class MainWindowViewModel : ViewModelBase
             {
                 bool isAuth = _authService.Login(_user.Login, _user.Password);
                 if (!isAuth) return;
-                var licWindow = new LicensesView();
-                licWindow.Show();
-                WindowUtils.SetMainWindow(licWindow);
+                var window = new ComputersView();
+                window.Show();
+                WindowUtils.SetMainWindow(window);
                 WindowUtils.CloseWindow<MainWindow>();
             }
             catch (Exception e)
